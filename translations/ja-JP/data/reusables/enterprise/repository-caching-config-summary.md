@@ -1,1 +1,1 @@
-リポジトリキャッシュと呼ばれる特別なタイプのレプリカを作成することで、リポジトリキャッシングを設定できます。
+You can configure repository caching by creating a special type of replica called a repository cache.

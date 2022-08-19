@@ -20,13 +20,7 @@ describe('category pages', () => {
 
   const walkOptions = {
     globs: ['*/index.md', 'enterprise/*/index.md'],
-    ignore: [
-      '{rest,graphql}/**',
-      'enterprise/index.md',
-      '**/articles/**',
-      'early-access/**',
-      'search/index.md',
-    ],
+    ignore: ['{rest,graphql}/**', 'enterprise/index.md', '**/articles/**', 'early-access/**'],
     directories: false,
     includeBasePath: true,
   }

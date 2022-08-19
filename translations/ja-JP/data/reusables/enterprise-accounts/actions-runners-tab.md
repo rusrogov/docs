@@ -1,1 +1,1 @@
-1. **Runners（ランナー）**タブをクリックしてください。
+1. Click the **Runners** tab.

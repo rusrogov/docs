@@ -7,11 +7,7 @@ export default async function genericToc(req, res, next) {
   if (!req.context.page) return next()
   if (req.context.currentLayoutName !== 'default') return next()
   // This middleware can only run on product, category, and map topics.
-  if (
-    req.context.page.documentType === 'homepage' ||
-    req.context.page.documentType === 'article' ||
-    req.context.page.relativePath === 'search/index.md'
-  )
+  if (req.context.page.documentType === 'homepage' || req.context.page.documentType === 'article')
     return next()
 
   // This one product TOC is weird.

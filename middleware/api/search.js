@@ -126,20 +126,10 @@ router.get(
   })
 )
 
-class ValidationError extends Error {}
-
 const validationMiddleware = (req, res, next) => {
   const params = [
     { key: 'query' },
-    {
-      key: 'version',
-      default_: 'dotcom',
-      validate: (v) => {
-        if (versionAliases[v] || allVersions[v]) return true
-        const valid = [...Object.keys(versionAliases), ...Object.keys(allVersions)]
-        throw new ValidationError(`'${v}' not in ${valid}`)
-      },
-    },
+    { key: 'version', default_: 'dotcom', validate: (v) => versionAliases[v] || allVersions[v] },
     { key: 'language', default_: 'en', validate: (v) => v in languages },
     {
       key: 'size',
@@ -170,17 +160,10 @@ const validationMiddleware = (req, res, next) => {
     if (cast) {
       value = cast(value)
     }
-    try {
-      if (validate && !validate(value)) {
-        return res
-          .status(400)
-          .json({ error: `Not a valid value (${JSON.stringify(value)}) for key '${key}'` })
-      }
-    } catch (err) {
-      if (err instanceof ValidationError) {
-        return res.status(400).json({ error: err.toString(), field: key })
-      }
-      throw err
+    if (validate && !validate(value)) {
+      return res
+        .status(400)
+        .json({ error: `Not a valid value (${JSON.stringify(value)}) for key '${key}'` })
     }
     search[key] = value
   }

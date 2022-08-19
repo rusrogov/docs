@@ -1,8 +1,8 @@
-1. 設定を適用するには、以下のコマンドを入力してください。
+1. To apply the configuration, enter the following command.
 
    {% note %}
 
-   **ノート**: 設定の実行中、{% data variables.product.product_location %}のサービスは再起動することがあり、ユーザに対して短いダウンタイムが生じることがあります。
+   **Note**: During a configuration run, services on {% data variables.product.product_location %} may restart, which can cause brief downtime for users.
 
    {% endnote %}
 

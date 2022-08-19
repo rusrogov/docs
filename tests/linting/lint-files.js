@@ -409,7 +409,6 @@ describe('lint markdown content', () => {
       isHidden,
       isEarlyAccess,
       isSitePolicy,
-      isSearch,
       hasExperimentalAlternative,
       frontmatterData
 
@@ -421,10 +420,8 @@ describe('lint markdown content', () => {
       frontmatterData = data
       ast = fromMarkdown(content)
       isHidden = data.hidden === true
-      const split = markdownRelPath.split('/')
-      isEarlyAccess = split.includes('early-access')
-      isSitePolicy = split.includes('site-policy-deprecated')
-      isSearch = split.includes('search') && !split.includes('reusables')
+      isEarlyAccess = markdownRelPath.split('/').includes('early-access')
+      isSitePolicy = markdownRelPath.split('/').includes('site-policy-deprecated')
       hasExperimentalAlternative = data.hasExperimentalAlternative === true
 
       links = []
@@ -460,10 +457,10 @@ describe('lint markdown content', () => {
         .map((schedule) => schedule.cron)
     })
 
-    test('hidden docs must be Early Access, Site Policy, Search, or Experimental', async () => {
-      // We need to support some non-Early Access hidden docs in Site Policy
+    // We need to support some non-Early Access hidden docs in Site Policy
+    test('hidden docs must be Early Access, Site Policy, or Experimental', async () => {
       if (isHidden) {
-        expect(isEarlyAccess || isSitePolicy || isSearch || hasExperimentalAlternative).toBe(true)
+        expect(isEarlyAccess || isSitePolicy || hasExperimentalAlternative).toBe(true)
       }
     })
 
